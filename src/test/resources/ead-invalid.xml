@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ead>
+    <eadheader>
+        <eadid></eadid>
+        <filedesc>
+            <titlestmt>
+                <titleproper></titleproper>
+            </titlestmt>
+        </filedesc>
+    </eadheader>
+    <archdesc level="fonds">
+        <did>
+            <p>invalid</p>
+        </did>
+        <dsc type="combined"></dsc>
+    </archdesc>
+</ead>
+
+

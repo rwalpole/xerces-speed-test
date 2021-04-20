@@ -1,0 +1,3174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ************************************************************ -->
+<!-- ************************************************************ -->
+<!-- ************************************************************ -->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!-- ENCODED ARCHIVAL DESCRIPTION -->
+<!-- DOCUMENT TYPE DEFINITION -->
+<!-- BASIC DECLARATIONS -->
+<!-- VERSION 1.0 -->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!-- Prepared and Maintained by the -->
+<!-- Encoded Archival Description Working Group -->
+<!-- of the Society of American Archivists -->
+<!-- and the -->
+<!-- Network Development and MARC Standards Office -->
+<!-- of the Library of Congress -->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!-- Society of American Archivists -->
+<!-- Chicago, Illinois -->
+<!-- 1998 -->
+<!---->
+<!---->
+<!---->
+<!---->
+<!-- ************************************************************ -->
+<!-- ************************************************************ -->
+<!-- ************************************************************ -->
+<!-- ************************************************************ -->
+<!-- ************************************************************ -->
+<!-- ************************************************************ -->
+<!-- Encoded Archival Description Basic Declarations -->
+<!---->
+<!-- EAD Technical Document No. 1, Part 3 -->
+<!---->
+<!---->
+<!-- This file constitutes a component of version 1.0 of the -->
+<!-- Encoded Archival Description Document Type Definition (DTD), -->
+<!-- released in August 1998.  Version 1.0 of the DTD supersedes -->
+<!-- the beta version made available via the EAD Internet site -->
+<!-- beginning in 1996. -->
+<!---->
+<!---->
+<!-- The SAA Encoded Archival Description Working Group is -->
+<!-- responsible for updating and editing the EAD DTD (EAD -->
+<!-- Technical Document No. 1) and tag library (EAD Technical -->
+<!-- Document No. 2). -->
+<!---->
+<!---->
+<!-- The LC Network Development and MARC Standards Office serves -->
+<!-- as the maintenance agency for online EAD documentation, -->
+<!-- including storage and delivery of electronic files and -->
+<!-- maintenance of the EAD Internet site, located at -->
+<!-- http://www.loc.gov/ead/. -->
+<!---->
+<!---->
+<!-- Published by the Society of American Archivists. -->
+<!---->
+<!---->
+<!-- Tag Library available from: -->
+<!-- Society of American Archivists -->
+<!-- 527 S. Wells Street, 5th floor -->
+<!-- Chicago, IL 60607 -->
+<!---->
+<!-- Phone:    312/922-0140 -->
+<!-- Fax:      312/347-1452 -->
+<!-- Internet: info@archivists.org -->
+<!---->
+<!---->
+<!-- (c) Society of American Archivists, 1998. -->
+<!-- All rights reserved. -->
+<!-- ************************************************************ -->
+<!-- ************************************************************ -->
+<!-- ************************************************************ -->
+<!-- ************************************************************ -->
+<!-- PUBLIC IDENTIFIER FOR EADBASE.ENT -->
+<!-- ************************************************************ -->
+<!--
+  
+  "-//Society of American Archivists//DTD eadbase.ent (Encoded Archival Description (EAD) Basic Declarations Version 1.0)//EN"
+  
+-->
+<!-- ************************************************************ -->
+<!-- ************************************************************ -->
+<!-- ************************************************************ -->
+<!-- INTRODUCTION -->
+<!-- ************************************************************ -->
+<!-- ************************************************************ -->
+<!--   NAME:      Encoded Archival Description Basic Declarations -->
+<!-- File name = eadbase.ent -->
+<!-- Version = 1.0 -->
+<!-- Version date = 980824 -->
+<!---->
+<!-- EDITOR:    Daniel V. Pitti -->
+<!-- Institute for Advanced Technology in the -->
+<!-- Humanities, University of Virginia -->
+<!---->
+<!-- PURPOSE:   Provides basic element and attribute -->
+<!-- declarations for ead.dtd and eadgrp.dtd. -->
+<!---->
+<!--   CONTACT:   EAD listserv of the Library of Congress Network -->
+<!-- Development and MARC Standards Office. -->
+<!-- To subscribe to this listserv, send a one-line -->
+<!-- message to LISTSERV@LOC.GOV containing the -->
+<!--              text:  SUBSCRIBE EAD YourName. Once subscribed, -->
+<!-- submit messages to EAD@LOC.GOV. -->
+<!---->
+<!-- EAD Internet site, located at -->
+<!-- http://www.loc.gov/ead/ -->
+<!---->
+<!-- DEPENDENCIES: -->
+<!-- None. -->
+<!---->
+<!-- ************************************************************ -->
+<!-- ************************************************************ -->
+<!-- ************************************************************ -->
+<!-- CHANGE HISTORY (POST VERSION 1.0 CHANGES) -->
+<!-- ************************************************************ -->
+<!--
+  NUM  DESCRIPTION OF CHANGE                                MM/DD/YY
+  
+  
+-->
+<!-- ************************************************************ -->
+<!-- END CHANGE HISTORY -->
+<!-- ************************************************************ -->
+<!-- ************************************************************ -->
+<!-- PARAMETER ENTITY DECLARATIONS -->
+<!-- ************************************************************ -->
+<!---->
+<!-- Conventions: -->
+<!-- m.     content model components -->
+<!-- cm.    complete content model -->
+<!-- a.     attribute model components -->
+<!-- av.    attribute declared value -->
+<!-- name-token-groups -->
+<!---->
+<!-- ************************************************************ -->
+<!-- ************************************************************ -->
+<!-- CONTENT MODEL COMPONENTS -->
+<!-- ************************************************************ -->
+<!-- ************************************************************ -->
+<!-- BASIC COMPONENTS -->
+<!-- RENDER ELEMENTS -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="m.render" abstract="true" substitutionGroup="m.phrase.bare"/>
+  <xs:element name="m.ptrs" abstract="true" substitutionGroup="m.phrase.bare"/>
+  <xs:element name="m.refs" abstract="true"/>
+  <xs:element name="m.access" abstract="true" substitutionGroup="m.data"/>
+  <xs:element name="m.data" abstract="true"/>
+  <!-- ************************************************************ -->
+  <!-- PHRASE COMPONENT -->
+  <!-- ************************************************************ -->
+  <!--
+    Phrase component models are widely used groups of elements.
+    The models are defined progessively, the models progress from
+    the least complex to the most complex.
+  -->
+  <!-- BARE PHRASE -->
+  <xs:element name="m.phrase.bare" abstract="true" substitutionGroup="m.phrase.basic.norefs"/>
+  <!-- BASIC PHRASE -->
+  <!--
+    m.phrase.basic.norefs is used in content model of bibref
+    and archref, and in the model used by ref and archref,
+    where inclusion of ref elements is selective
+  -->
+  <xs:element name="m.phrase.basic.norefs" abstract="true"/>
+  <xs:group name="m.phrase.basic">
+    <xs:choice>
+      <xs:element ref="m.phrase.basic.norefs"/>
+      <xs:element ref="m.refs"/>
+    </xs:choice>
+  </xs:group>
+  <!-- PHRASE PLUS ELEMENTS -->
+  <!--
+    m.phrase.plus.norefs used in content model of
+    para.content.norefs which is used in content model of ref
+    and archref, where inclusion of ref elements is selective.
+  -->
+  <xs:group name="m.phrase.plus.norefs">
+    <xs:choice>
+      <xs:element ref="m.phrase.basic.norefs"/>
+      <xs:element ref="m.data"/>
+    </xs:choice>
+  </xs:group>
+  <xs:group name="m.phrase.plus">
+    <xs:choice>
+      <xs:element ref="m.phrase.basic.norefs"/>
+      <xs:element ref="m.data"/>
+      <xs:element ref="m.refs"/>
+    </xs:choice>
+  </xs:group>
+  <!-- ************************************************************ -->
+  <!-- INTERMEDIATE-LEVEL COMPONENTS -->
+  <!-- ************************************************************ -->
+  <!-- Elements that can occur within or among paragraphs. -->
+  <xs:group name="m.inter.noquote">
+    <xs:choice>
+      <xs:element ref="address"/>
+      <xs:element ref="chronlist"/>
+      <xs:element ref="list"/>
+      <xs:element ref="note"/>
+      <xs:element ref="table"/>
+    </xs:choice>
+  </xs:group>
+  <xs:group name="m.inter">
+    <xs:choice>
+      <xs:group ref="m.inter.noquote"/>
+      <xs:element ref="blockquote"/>
+    </xs:choice>
+  </xs:group>
+  <!-- ************************************************************ -->
+  <!-- PARAGRAPH-LEVEL COMPONENTS -->
+  <!-- ************************************************************ -->
+  <!-- Elements that can occur at the same level as a paragraph. -->
+  <xs:group name="m.blocks">
+    <xs:choice>
+      <xs:group ref="m.inter"/>
+      <xs:element ref="p"/>
+    </xs:choice>
+  </xs:group>
+  <!-- m.block.noquote used in content model of blockquote -->
+  <xs:group name="m.blocks.noquote">
+    <xs:choice>
+      <xs:group ref="m.inter.noquote"/>
+      <xs:element ref="p"/>
+    </xs:choice>
+  </xs:group>
+  <!-- ************************************************************ -->
+  <!-- COMPONENTS FOR DESCRIPTIVE ELEMENTS -->
+  <!-- ************************************************************ -->
+  <!-- DESCRIPTIVE IDENTIFICATION ELEMENTS -->
+  <xs:group name="m.did">
+    <xs:choice>
+      <xs:element ref="abstract"/>
+      <xs:element ref="physdesc"/>
+      <xs:element ref="note"/>
+      <xs:element ref="repository"/>
+      <xs:element ref="origination"/>
+      <xs:element ref="unitdate"/>
+      <xs:element ref="unitid"/>
+      <xs:element ref="unittitle"/>
+      <xs:element ref="container"/>
+      <xs:element ref="physloc"/>
+      <xs:element ref="dao"/>
+      <xs:element ref="daogrp"/>
+    </xs:choice>
+  </xs:group>
+  <!-- DESCRIPTIVE ELEMENTS -->
+  <!-- m.desc.base used in dentry -->
+  <xs:element name="m.desc.base" abstract="true"/>
+  <xs:group name="m.desc.full">
+    <xs:choice>
+      <xs:element ref="m.desc.base"/>
+      <xs:element ref="dsc"/>
+      <xs:element ref="dao"/>
+      <xs:element ref="daogrp"/>
+      <xs:element ref="note"/>
+    </xs:choice>
+  </xs:group>
+  <!-- ADMINISTRATIVE INFORMATION -->
+  <xs:element name="m.admininfo" abstract="true"/>
+  <!-- ************************************************************ -->
+  <!-- INSIDE PARAGRAPHS AND NOTES -->
+  <!-- ************************************************************ -->
+  <!--
+    PARAGRAPH CONTENT
+    Elements that can occur inside a
+    paragraph
+  -->
+  <xs:group name="m.para.content">
+    <xs:choice>
+      <xs:group ref="m.phrase.plus"/>
+      <xs:group ref="m.inter"/>
+    </xs:choice>
+  </xs:group>
+  <!--
+    para.content.norefs used in content model of ref elements,
+    where inclusion of ref elements is selective
+  -->
+  <xs:group name="m.para.content.norefs">
+    <xs:choice>
+      <xs:group ref="m.phrase.plus.norefs"/>
+      <xs:group ref="m.inter"/>
+    </xs:choice>
+  </xs:group>
+  <!-- ************************************************************ -->
+  <!-- INSIDE TABLE ENTRY -->
+  <!-- ************************************************************ -->
+  <xs:group name="m.table.entry">
+    <xs:choice>
+      <xs:group ref="m.phrase.plus"/>
+      <xs:element ref="address"/>
+      <xs:element ref="list"/>
+      <xs:element ref="note"/>
+    </xs:choice>
+  </xs:group>
+  <!-- ************************************************************ -->
+  <!-- COMPLETE CONTENT MODELS -->
+  <!-- ************************************************************ -->
+  <!-- HEADS AND PARAGRAPHS -->
+  <xs:complexType name="cm.head.n.para">
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="head"/>
+      <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.blocks"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- ************************************************************ -->
+  <!-- PARAMETER ENTITIES FOR ATTRIBUTE LISTS -->
+  <!-- ************************************************************ -->
+  <!-- ************************************************************ -->
+  <!-- PARAMETER ENTITIES FOR CLUSTERS OF VALUES -->
+  <!-- ************************************************************ -->
+  <xs:simpleType name="av.level">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="series"/>
+      <xs:enumeration value="collection"/>
+      <xs:enumeration value="file"/>
+      <xs:enumeration value="fonds"/>
+      <xs:enumeration value="item"/>
+      <xs:enumeration value="otherlevel"/>
+      <xs:enumeration value="recordgrp"/>
+      <xs:enumeration value="subgrp"/>
+      <xs:enumeration value="subseries"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="av.render">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="bold"/>
+      <xs:enumeration value="italic"/>
+      <xs:enumeration value="bolditalic"/>
+      <xs:enumeration value="boldunderline"/>
+      <xs:enumeration value="boldsmcaps"/>
+      <xs:enumeration value="boldquoted"/>
+      <xs:enumeration value="nonproport"/>
+      <xs:enumeration value="altrender"/>
+      <xs:enumeration value="quoted"/>
+      <xs:enumeration value="smcaps"/>
+      <xs:enumeration value="sub"/>
+      <xs:enumeration value="super"/>
+      <xs:enumeration value="underline"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!--
+    SOURCE ATTRIBUTE VALUES:
+    
+    aat      = Art and Architecture Thesaurus
+    aacr2    = Anglo-American Cataloging rules, 2nd edition,
+                revised
+    cdwa     = Categories for the Description of Works of Art
+    dot      = Dictionary of Occupational Titles
+    gmgpc    = Thesaurus for Graphic Materials II
+    lcnaf    = Library of Congress Name Authority File
+    lcsh     = Library of Congress Subject Headings
+    lctgm    = Thesaurus for Graphic Materials I
+    local    = heading from a locally maintained list of
+                index terms
+    mesh     = Medical Subject Headings
+    mim      = Moving Image Materials
+    ncarules = National Council of Archives, Rules for the
+                Construction of Personal, Corporate and Place
+                Names
+    nmc      = Revised Nomenclature for Museum Cataloging
+    rad      = Rules for Archival Description
+    rbgenr   = Genre Terms
+    tgn      = Thesaurus of Geographic Names
+    ulan     = Union List of Artist Names
+    
+  -->
+  <xs:simpleType name="av.sources">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="aat"/>
+      <xs:enumeration value="aacr2"/>
+      <xs:enumeration value="cdwa"/>
+      <xs:enumeration value="dot"/>
+      <xs:enumeration value="gmgpc"/>
+      <xs:enumeration value="lcnaf"/>
+      <xs:enumeration value="lcsh"/>
+      <xs:enumeration value="lctgm"/>
+      <xs:enumeration value="local"/>
+      <xs:enumeration value="mesh"/>
+      <xs:enumeration value="mim"/>
+      <xs:enumeration value="ncarules"/>
+      <xs:enumeration value="nmc"/>
+      <xs:enumeration value="rad"/>
+      <xs:enumeration value="rbgenr"/>
+      <xs:enumeration value="tgn"/>
+      <xs:enumeration value="ulan"/>
+      <xs:enumeration value="othersource"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="av.container">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="carton"/>
+      <xs:enumeration value="box"/>
+      <xs:enumeration value="folder"/>
+      <xs:enumeration value="reel"/>
+      <xs:enumeration value="frame"/>
+      <xs:enumeration value="oversize"/>
+      <xs:enumeration value="reel-frame"/>
+      <xs:enumeration value="volume"/>
+      <xs:enumeration value="map-case"/>
+      <xs:enumeration value="box-folder"/>
+      <xs:enumeration value="page"/>
+      <xs:enumeration value="folio"/>
+      <xs:enumeration value="othertype"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- ************************************************************ -->
+  <!-- COMMON ATTRIBUTES -->
+  <!-- ************************************************************ -->
+  <!-- Attributes used on most ead elements -->
+  <xs:attributeGroup name="a.common">
+    <xs:attribute name="id" type="xs:ID"/>
+    <xs:attribute name="altrender"/>
+    <xs:attribute name="audience">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="external"/>
+          <xs:enumeration value="internal"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- ACCESS ATTRIBUTES -->
+  <!-- ************************************************************ -->
+  <!-- Attributes shared by all access elements. -->
+  <xs:attributeGroup name="a.access">
+    <xs:attribute name="source" type="av.sources"/>
+    <xs:attribute name="othersource"/>
+    <xs:attribute name="encodinganalog"/>
+    <xs:attribute name="authfilenumber"/>
+    <xs:attribute name="normal"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- DESCRIPTION ATTRIBUTES -->
+  <!-- ************************************************************ -->
+  <!-- Descriptive attributes shared by archdesc and c's. -->
+  <xs:attributeGroup name="a.desc.base">
+    <xs:attribute name="otherlevel"/>
+    <xs:attribute name="langmaterial"/>
+    <xs:attribute name="legalstatus">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="public"/>
+          <xs:enumeration value="private"/>
+          <xs:enumeration value="otherlegalstatus"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="otherlegalstatus"/>
+  </xs:attributeGroup>
+  <!-- Archdesc (add REQUIRED level attribute) -->
+  <xs:attributeGroup name="a.desc.all">
+    <xs:attribute name="level" use="required" type="av.level"/>
+    <xs:attributeGroup ref="a.desc.base"/>
+  </xs:attributeGroup>
+  <!-- Components (add IMPLIED level attribute) -->
+  <xs:attributeGroup name="a.component">
+    <xs:attribute name="level" type="av.level"/>
+    <xs:attributeGroup ref="a.desc.base"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- ************************************************************ -->
+  <!-- LINKING AND POINTING ATTRIBUTES WITH XLINK -->
+  <!-- ************************************************************ -->
+  <!-- ************************************************************ -->
+  <!-- ************************************************************ -->
+  <!-- XLINK ATTRIBUTE SETS -->
+  <!-- ************************************************************ -->
+  <xs:attributeGroup name="locator.att">
+    <xs:attribute name="href"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="link-semantics.att">
+    <xs:attribute name="inline" default="true">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="true"/>
+          <xs:enumeration value="false"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="role"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="simple-link-semantics.att">
+    <xs:attribute name="inline" default="true">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="true"/>
+          <xs:enumeration value="false"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="remote-resource-semantics.att">
+    <xs:attribute name="role"/>
+    <xs:attribute name="title"/>
+    <xs:attribute name="show">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="embed"/>
+          <xs:enumeration value="replace"/>
+          <xs:enumeration value="new"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="actuate">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="auto"/>
+          <xs:enumeration value="user"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="behavior"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="local-resource-semantics.att">
+    <xs:attribute name="content-role"/>
+    <xs:attribute name="content-title"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- END XLINK ATTRIBUTE SETS -->
+  <!-- ************************************************************ -->
+  <!-- ************************************************************ -->
+  <!-- EAD LINKING AND POINTING ATTRIBUTES -->
+  <!-- ************************************************************ -->
+  <xs:attributeGroup name="a.internal.ptr">
+    <xs:attribute name="target" type="xs:IDREF"/>
+    <xs:attribute name="xpointer"/>
+    <xs:attributeGroup ref="locator.att"/>
+    <xs:attributeGroup ref="remote-resource-semantics.att"/>
+    <xs:attributeGroup ref="local-resource-semantics.att"/>
+    <xs:attributeGroup ref="simple-link-semantics.att"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="a.external.ptr">
+    <xs:attribute name="entityref" type="xs:ENTITY"/>
+    <xs:attribute name="xpointer"/>
+    <xs:attributeGroup ref="locator.att"/>
+    <xs:attributeGroup ref="remote-resource-semantics.att"/>
+    <xs:attributeGroup ref="local-resource-semantics.att"/>
+    <xs:attributeGroup ref="simple-link-semantics.att"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="a.linkgrp">
+    <xs:attributeGroup ref="link-semantics.att"/>
+    <xs:attributeGroup ref="local-resource-semantics.att"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="a.loc.internal.ptr">
+    <xs:attribute name="target" type="xs:IDREF"/>
+    <xs:attribute name="xpointer"/>
+    <xs:attributeGroup ref="locator.att"/>
+    <xs:attributeGroup ref="remote-resource-semantics.att"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="a.loc.external.ptr">
+    <xs:attribute name="entityref" type="xs:ENTITY"/>
+    <xs:attribute name="xpointer"/>
+    <xs:attributeGroup ref="locator.att"/>
+    <xs:attributeGroup ref="remote-resource-semantics.att"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- END LINKING AND POINTING ATTRIBUTES WITH XLINK -->
+  <!-- ************************************************************ -->
+  <!-- ************************************************************ -->
+  <!-- ************************************************************ -->
+  <!-- ENCODED ARCHIVAL DESCRIPTION -->
+  <!-- ELEMENT DECLARATIONS -->
+  <!-- ************************************************************ -->
+  <!-- ************************************************************ -->
+  <xs:element name="ead">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="eadheader"/>
+        <xs:element minOccurs="0" ref="frontmatter"/>
+        <xs:element ref="archdesc"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.ead"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.ead">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="relatedencoding"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- EAD HEADER -->
+  <!-- ************************************************************ -->
+  <xs:element name="eadheader">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="eadid"/>
+        <xs:element ref="filedesc"/>
+        <xs:element minOccurs="0" ref="profiledesc"/>
+        <xs:element minOccurs="0" ref="revisiondesc"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.eadheader"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.eadheader">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="langencoding"/>
+    <xs:attribute name="relatedencoding"/>
+    <xs:attribute name="findaidstatus">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="unverified-partial-draft"/>
+          <xs:enumeration value="unverified-full-draft"/>
+          <xs:enumeration value="edited-partial-draft"/>
+          <xs:enumeration value="edited-full-draft"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- EAD ID -->
+  <xs:element name="eadid">
+    <xs:complexType mixed="true">
+      <xs:attributeGroup ref="attlist.eadid"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.eadid">
+    <xs:attribute name="systemid"/>
+    <xs:attribute name="source"/>
+    <xs:attribute name="type"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- FILE DESCRIPTION ELEMENTS -->
+  <xs:element name="filedesc">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="titlestmt"/>
+        <xs:element minOccurs="0" ref="editionstmt"/>
+        <xs:element minOccurs="0" ref="publicationstmt"/>
+        <xs:element minOccurs="0" ref="seriesstmt"/>
+        <xs:element minOccurs="0" ref="notestmt"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.filedesc"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.filedesc">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- TITLE STATEMENT -->
+  <xs:element name="titlestmt">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="titleproper"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="subtitle"/>
+        <xs:element minOccurs="0" ref="author"/>
+        <xs:element minOccurs="0" ref="sponsor"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.titlestmt"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.titlestmt">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- TITLE PROPER -->
+  <xs:element name="titleproper">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="m.phrase.bare"/>
+        <xs:element ref="abbr"/>
+        <xs:element ref="date"/>
+        <xs:element ref="expan"/>
+        <xs:element ref="num"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.titleproper"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.titleproper">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="extent">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="all"/>
+          <xs:enumeration value="part"/>
+          <xs:enumeration value="unknown-extent"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="pubstatus">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="pub"/>
+          <xs:enumeration value="unpub"/>
+          <xs:enumeration value="unknown-pub"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="render" type="av.render"/>
+    <xs:attribute name="type"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- SUBTITLE -->
+  <xs:element name="subtitle">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="m.phrase.bare"/>
+        <xs:element ref="abbr"/>
+        <xs:element ref="date"/>
+        <xs:element ref="expan"/>
+        <xs:element ref="num"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.subtitle"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.subtitle">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- AUTHOR -->
+  <xs:element name="author">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="m.phrase.bare"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.author"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.author">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- SPONSOR -->
+  <xs:element name="sponsor">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="m.phrase.bare"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.sponsor"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.sponsor">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- EDITION STATEMENT -->
+  <xs:element name="editionstmt">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element ref="edition"/>
+        <xs:element ref="p"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.editionstmt"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.editionstmt">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- PUBLICATION STATEMENT -->
+  <xs:element name="publicationstmt">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element ref="publisher"/>
+        <xs:element ref="date"/>
+        <xs:element ref="address"/>
+        <xs:element ref="num"/>
+        <xs:element ref="p"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.publicationstmt"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.publicationstmt">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- SERIES STATEMENT -->
+  <xs:element name="seriesstmt">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element ref="titleproper"/>
+        <xs:element ref="num"/>
+        <xs:element ref="p"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.seriesstmt"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.seriesstmt">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- NOTE STATEMENT -->
+  <xs:element name="notestmt">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="note"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.notestmt"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.notestmt">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- PROFILE DESCRIPTION -->
+  <xs:element name="profiledesc">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="creation"/>
+        <xs:element minOccurs="0" ref="langusage"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.profiledesc"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.profiledesc">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- CREATION -->
+  <xs:element name="creation">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="m.phrase.basic"/>
+        <xs:element ref="date"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.creation"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.creation">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- LANGUAGE USAGE -->
+  <xs:element name="langusage">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="m.phrase.basic"/>
+        <xs:element ref="language"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.langusage"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.langusage">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- LANGUAGE (of description) -->
+  <xs:element name="language">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="m.phrase.bare"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.language"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.language">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- REVISION DESCRIPTION -->
+  <xs:element name="revisiondesc">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="list"/>
+        <xs:element maxOccurs="unbounded" ref="change"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.revisiondesc"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.revisiondesc">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- CHANGE -->
+  <xs:element name="change">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="date"/>
+        <xs:element maxOccurs="unbounded" ref="item"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.change"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.change">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- FRONT MATTER ELEMENTS -->
+  <!-- ************************************************************ -->
+  <xs:element name="frontmatter">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="titlepage"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="div"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.frontmatter"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.frontmatter">
+    <xs:attributeGroup ref="a.common"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- TITLE PAGE -->
+  <xs:element name="titlepage">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="m.blocks"/>
+        <xs:element ref="author"/>
+        <xs:element ref="date"/>
+        <xs:element ref="edition"/>
+        <xs:element ref="num"/>
+        <xs:element ref="publisher"/>
+        <xs:element ref="bibseries"/>
+        <xs:element ref="sponsor"/>
+        <xs:element ref="titleproper"/>
+        <xs:element ref="subtitle"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.titlepage"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.titlepage">
+    <xs:attributeGroup ref="a.common"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- DIVISION -->
+  <xs:element name="div">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.blocks"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="div"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.div"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.div">
+    <xs:attributeGroup ref="a.common"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- ARCHIVAL DESCRIPTION -->
+  <!-- ************************************************************ -->
+  <xs:element name="archdesc">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="runner"/>
+        <xs:element ref="did"/>
+        <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.desc.full"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.archdesc"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.archdesc">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="type">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="inventory"/>
+          <xs:enumeration value="register"/>
+          <xs:enumeration value="othertype"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="othertype"/>
+    <xs:attributeGroup ref="a.desc.all"/>
+    <xs:attribute name="encodinganalog"/>
+    <xs:attribute name="relatedencoding"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- RUNNER -->
+  <xs:element name="runner">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="m.phrase.bare"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.runner"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.runner">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="placement">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="header"/>
+          <xs:enumeration value="footer"/>
+          <xs:enumeration value="watermark"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="role"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- DESCRIPTIVE IDENTIFICATION -->
+  <xs:element name="did">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.did"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.did"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.did">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- PHYSICAL DESCRIPTION -->
+  <xs:element name="physdesc">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="m.phrase.basic"/>
+        <xs:element ref="dimensions"/>
+        <xs:element ref="physfacet"/>
+        <xs:element ref="extent"/>
+        <xs:element ref="date"/>
+        <xs:element ref="m.access"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.physdesc"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.physdesc">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="source" type="av.sources"/>
+    <xs:attribute name="othersource"/>
+    <xs:attribute name="label"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- DIMENSIONS -->
+  <xs:element name="dimensions">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="m.phrase.basic"/>
+        <xs:element ref="dimensions"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.dimensions"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.dimensions">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="type"/>
+    <xs:attribute name="unit"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- PHYSICAL FACET -->
+  <xs:element name="physfacet">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="m.phrase.basic"/>
+        <xs:element ref="m.access"/>
+        <xs:element ref="date"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.physfacet"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.physfacet">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="type"/>
+    <xs:attribute name="unit"/>
+    <xs:attribute name="source" type="av.sources"/>
+    <xs:attribute name="othersource"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- EXTENT -->
+  <xs:element name="extent">
+    <xs:complexType mixed="true">
+      <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.phrase.basic"/>
+      <xs:attributeGroup ref="attlist.extent"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.extent">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="type"/>
+    <xs:attribute name="unit"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- ORIGINATION -->
+  <xs:element name="origination" substitutionGroup="m.data">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="m.phrase.basic"/>
+        <xs:element ref="corpname"/>
+        <xs:element ref="famname"/>
+        <xs:element ref="name"/>
+        <xs:element ref="persname"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.origination"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.origination">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="label"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- REPOSITORY -->
+  <xs:element name="repository" substitutionGroup="m.data">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="m.phrase.basic"/>
+        <xs:element ref="address"/>
+        <xs:element ref="corpname"/>
+        <xs:element ref="name"/>
+        <xs:element ref="subarea"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.repository"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.repository">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="label"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- SUBAREA -->
+  <xs:element name="subarea">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="m.phrase.bare"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.subarea"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.subarea">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- UNIT DATE -->
+  <xs:element name="unitdate" substitutionGroup="m.data">
+    <xs:complexType mixed="true">
+      <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.phrase.basic"/>
+      <xs:attributeGroup ref="attlist.unitdate"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.unitdate">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="label"/>
+    <xs:attribute name="type">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="bulk"/>
+          <xs:enumeration value="inclusive"/>
+          <xs:enumeration value="single"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="certainty"/>
+    <xs:attribute name="normal"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- UNIT IDENTIFICATION -->
+  <xs:element name="unitid">
+    <xs:complexType mixed="true">
+      <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.phrase.basic"/>
+      <xs:attributeGroup ref="attlist.unitid"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.unitid">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="label"/>
+    <xs:attribute name="type"/>
+    <xs:attribute name="encodinganalog"/>
+    <xs:attribute name="countrycode"/>
+    <xs:attribute name="repositorycode"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- REPOSITORY -->
+  <xs:element name="container">
+    <xs:complexType mixed="true">
+      <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.phrase.basic"/>
+      <xs:attributeGroup ref="attlist.container"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.container">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="label"/>
+    <xs:attribute name="type" type="av.container"/>
+    <xs:attribute name="othertype"/>
+    <xs:attribute name="encodinganalog"/>
+    <xs:attribute name="parent" type="xs:IDREFS"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- PHYSICAL LOCATION -->
+  <xs:element name="physloc">
+    <xs:complexType mixed="true">
+      <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.phrase.basic"/>
+      <xs:attributeGroup ref="attlist.physloc"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.physloc">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="label"/>
+    <xs:attribute name="type"/>
+    <xs:attribute name="encodinganalog"/>
+    <xs:attribute name="parent" type="xs:IDREFS"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- UNIT TITLE -->
+  <xs:element name="unittitle" substitutionGroup="m.data">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="m.phrase.basic"/>
+        <xs:element ref="m.access"/>
+        <xs:element ref="unitdate"/>
+        <xs:element ref="num"/>
+        <xs:element ref="date"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.unittitle"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.unittitle">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="label"/>
+    <xs:attribute name="encodinganalog"/>
+    <xs:attribute name="type"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- ABSTRACT -->
+  <xs:element name="abstract">
+    <xs:complexType mixed="true">
+      <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.phrase.basic"/>
+      <xs:attributeGroup ref="attlist.abstract"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.abstract">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="label"/>
+    <xs:attribute name="encodinganalog"/>
+    <xs:attribute name="type"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- ADMINISTRATIVE INFORMATION ELEMENTS -->
+  <xs:element name="admininfo" substitutionGroup="m.desc.base">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:choice maxOccurs="unbounded">
+          <xs:group ref="m.blocks"/>
+          <xs:element ref="m.admininfo"/>
+          <xs:element ref="admininfo"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.admininfo"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.admininfo">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="type"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- ACCRUALS -->
+  <xs:element name="accruals" substitutionGroup="m.admininfo">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="cm.head.n.para">
+          <xs:attributeGroup ref="attlist.accruals"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.accruals">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- ACCESS RESTRICTIONS -->
+  <xs:element name="accessrestrict" substitutionGroup="m.admininfo">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="cm.head.n.para">
+          <xs:attributeGroup ref="attlist.accessrestrict"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.accessrestrict">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- ACQUISTIONS INFORMATION -->
+  <xs:element name="acqinfo" substitutionGroup="m.admininfo">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="cm.head.n.para">
+          <xs:attributeGroup ref="attlist.acqinfo"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.acqinfo">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- ALTERNATIVE FORM AVAILABLE -->
+  <xs:element name="altformavail" substitutionGroup="m.admininfo">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="cm.head.n.para">
+          <xs:attributeGroup ref="attlist.altformavail"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.altformavail">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+    <xs:attribute name="type"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- APPRAISAL -->
+  <xs:element name="appraisal" substitutionGroup="m.admininfo">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="cm.head.n.para">
+          <xs:attributeGroup ref="attlist.appraisal"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.appraisal">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- CUSTODIAL HISTORY -->
+  <xs:element name="custodhist" substitutionGroup="m.admininfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:group ref="m.blocks"/>
+          <xs:element ref="acqinfo"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.custodhist"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.custodhist">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- PREFERRED CITATION -->
+  <xs:element name="prefercite" substitutionGroup="m.admininfo">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="cm.head.n.para">
+          <xs:attributeGroup ref="attlist.prefercite"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.prefercite">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- PROCESSING INFORMATION -->
+  <xs:element name="processinfo" substitutionGroup="m.admininfo">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="cm.head.n.para">
+          <xs:attributeGroup ref="attlist.processinfo"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.processinfo">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- USE RESTRICTIONS -->
+  <xs:element name="userestrict" substitutionGroup="m.admininfo">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="cm.head.n.para">
+          <xs:attributeGroup ref="attlist.userestrict"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.userestrict">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- BIOGRAPHICAL HISTORY -->
+  <xs:element name="bioghist" substitutionGroup="m.desc.base">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:choice maxOccurs="unbounded">
+          <xs:group ref="m.blocks"/>
+          <xs:element ref="bioghist"/>
+          <xs:element ref="dao"/>
+          <xs:element ref="daogrp"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.bioghist"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.bioghist">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- CONTROLLED ACCESS ELEMENTS -->
+  <xs:element name="controlaccess" substitutionGroup="m.desc.base">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:choice maxOccurs="unbounded">
+          <xs:group ref="m.blocks"/>
+          <xs:element ref="m.access"/>
+          <xs:element ref="title"/>
+          <xs:element ref="controlaccess"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.controlaccess"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.controlaccess">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- OTHER DESCRIPTIVE DATA -->
+  <xs:element name="odd" substitutionGroup="m.desc.base">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:group ref="m.blocks"/>
+          <xs:element ref="dao"/>
+          <xs:element ref="daogrp"/>
+          <xs:element ref="odd"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.odd"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.odd">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="type"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- SCOPE AND CONTENT -->
+  <xs:element name="scopecontent" substitutionGroup="m.desc.base">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:choice maxOccurs="unbounded">
+          <xs:group ref="m.blocks"/>
+          <xs:element ref="arrangement"/>
+          <xs:element ref="organization"/>
+          <xs:element ref="scopecontent"/>
+          <xs:element ref="dao"/>
+          <xs:element ref="daogrp"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.scopecontent"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.scopecontent">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- ARRANGEMENT -->
+  <xs:element name="arrangement" substitutionGroup="m.desc.base">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:group ref="m.blocks"/>
+          <xs:element ref="arrangement"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.arrangement"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.arrangement">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- ORGANIZAITON -->
+  <xs:element name="organization" substitutionGroup="m.desc.base">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:group ref="m.blocks"/>
+          <xs:element ref="organization"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.organization"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.organization">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- DESCRIPTION OF SUBORDINATE COMPONENTS -->
+  <!-- ************************************************************ -->
+  <!-- ************************************************************ -->
+  <!-- TABULAR MODEL -->
+  <!-- ************************************************************ -->
+  <!-- NONTABULAR MODEL -->
+  <xs:element name="dsc">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="head"/>
+          <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.blocks"/>
+        </xs:sequence>
+        <xs:choice>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element minOccurs="0" ref="thead"/>
+            <xs:choice>
+              <xs:element minOccurs="0" maxOccurs="unbounded" ref="c"/>
+              <xs:element minOccurs="0" maxOccurs="unbounded" ref="c01"/>
+            </xs:choice>
+          </xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="dsc"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.dsc"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.dsc">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="type" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="analyticover"/>
+          <xs:enumeration value="combined"/>
+          <xs:enumeration value="in-depth"/>
+          <xs:enumeration value="othertype"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="othertype"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- COMPONENT DESCRIPTION (RECURSIVE) -->
+  <xs:element name="c">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:element ref="did"/>
+        <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.desc.full"/>
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element minOccurs="0" ref="thead"/>
+          <xs:element maxOccurs="unbounded" ref="c"/>
+        </xs:sequence>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.c"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.c">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.component"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- COMPONENT DESCRIPTION (ENUMERATIVE COMPONENT 1) -->
+  <xs:element name="c01">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:element ref="did"/>
+        <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.desc.full"/>
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element minOccurs="0" ref="thead"/>
+          <xs:element maxOccurs="unbounded" ref="c02"/>
+        </xs:sequence>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.c01"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.c01">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.component"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- COMPONENT DESCRIPTION (ENUMERATIVE COMPONENT 2) -->
+  <xs:element name="c02">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:element ref="did"/>
+        <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.desc.full"/>
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element minOccurs="0" ref="thead"/>
+          <xs:element maxOccurs="unbounded" ref="c03"/>
+        </xs:sequence>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.c02"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.c02">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.component"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- COMPONENT DESCRIPTION (ENUMERATIVE COMPONENT 3) -->
+  <xs:element name="c03">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:element ref="did"/>
+        <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.desc.full"/>
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element minOccurs="0" ref="thead"/>
+          <xs:element maxOccurs="unbounded" ref="c04"/>
+        </xs:sequence>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.c03"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.c03">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.component"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- COMPONENT DESCRIPTION (ENUMERATIVE COMPONENT 4) -->
+  <xs:element name="c04">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:element ref="did"/>
+        <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.desc.full"/>
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element minOccurs="0" ref="thead"/>
+          <xs:element maxOccurs="unbounded" ref="c05"/>
+        </xs:sequence>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.c04"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.c04">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.component"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- COMPONENT DESCRIPTION (ENUMERATIVE COMPONENT 5) -->
+  <xs:element name="c05">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:element ref="did"/>
+        <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.desc.full"/>
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element minOccurs="0" ref="thead"/>
+          <xs:element maxOccurs="unbounded" ref="c06"/>
+        </xs:sequence>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.c05"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.c05">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.component"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- COMPONENT DESCRIPTION (ENUMERATIVE COMPONENT 6) -->
+  <xs:element name="c06">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:element ref="did"/>
+        <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.desc.full"/>
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element minOccurs="0" ref="thead"/>
+          <xs:element maxOccurs="unbounded" ref="c07"/>
+        </xs:sequence>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.c06"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.c06">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.component"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- COMPONENT DESCRIPTION (ENUMERATIVE COMPONENT 7) -->
+  <xs:element name="c07">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:element ref="did"/>
+        <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.desc.full"/>
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element minOccurs="0" ref="thead"/>
+          <xs:element maxOccurs="unbounded" ref="c08"/>
+        </xs:sequence>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.c07"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.c07">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.component"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- COMPONENT DESCRIPTION (ENUMERATIVE COMPONENT 8) -->
+  <xs:element name="c08">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:element ref="did"/>
+        <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.desc.full"/>
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element minOccurs="0" ref="thead"/>
+          <xs:element maxOccurs="unbounded" ref="c09"/>
+        </xs:sequence>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.c08"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.c08">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.component"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- COMPONENT DESCRIPTION (ENUMERATIVE COMPONENT 9) -->
+  <xs:element name="c09">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:element ref="did"/>
+        <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.desc.full"/>
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element minOccurs="0" ref="thead"/>
+          <xs:element maxOccurs="unbounded" ref="c10"/>
+        </xs:sequence>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.c09"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.c09">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.component"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- COMPONENT DESCRIPTION (ENUMERATIVE COMPONENT 10) -->
+  <xs:element name="c10">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:element ref="did"/>
+        <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.desc.full"/>
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element minOccurs="0" ref="thead"/>
+          <xs:element maxOccurs="unbounded" ref="c11"/>
+        </xs:sequence>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.c10"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.c10">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.component"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- COMPONENT DESCRIPTION (ENUMERATIVE COMPONENT 11) -->
+  <xs:element name="c11">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:element ref="did"/>
+        <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.desc.full"/>
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element minOccurs="0" ref="thead"/>
+          <xs:element maxOccurs="unbounded" ref="c12"/>
+        </xs:sequence>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.c11"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.c11">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.component"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- COMPONENT DESCRIPTION (ENUMERATIVE COMPONENT 12) -->
+  <xs:element name="c12">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:element ref="did"/>
+        <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.desc.full"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.c12"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.c12">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.component"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- ADJUNCT DESCRIPTIVE DATA -->
+  <xs:element name="add" substitutionGroup="m.desc.base">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:group ref="m.blocks"/>
+          <xs:element ref="bibliography"/>
+          <xs:element ref="fileplan"/>
+          <xs:element ref="index"/>
+          <xs:element ref="relatedmaterial"/>
+          <xs:element ref="separatedmaterial"/>
+          <xs:element ref="add"/>
+          <xs:element ref="otherfindaid"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.add"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.add">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="type"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- BIBLIOGRAPHY -->
+  <xs:element name="bibliography">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:group ref="m.blocks"/>
+          <xs:element ref="m.refs"/>
+          <xs:element ref="bibliography"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.bibliography"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.bibliography">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="numbered">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="yes"/>
+          <xs:enumeration value="no"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- FILE PLAN -->
+  <xs:element name="fileplan">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:group ref="m.blocks"/>
+          <xs:element ref="fileplan"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.fileplan"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.fileplan">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- RELATED MATERIAL -->
+  <xs:element name="relatedmaterial">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:group ref="m.blocks"/>
+          <xs:element ref="m.refs"/>
+          <xs:element ref="relatedmaterial"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.relatedmaterial"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.relatedmaterial">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- SEPARATED MATERIAL -->
+  <xs:element name="separatedmaterial">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:group ref="m.blocks"/>
+          <xs:element ref="m.refs"/>
+          <xs:element ref="separatedmaterial"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.separatedmaterial"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.separatedmaterial">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- OTHER FINDING AID -->
+  <xs:element name="otherfindaid">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:group ref="m.blocks"/>
+          <xs:element ref="m.refs"/>
+          <xs:element ref="otherfindaid"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.otherfindaid"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.otherfindaid">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- INDEX -->
+  <xs:element name="index">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.blocks"/>
+        <xs:choice>
+          <xs:sequence>
+            <xs:element minOccurs="0" ref="listhead"/>
+            <xs:element maxOccurs="unbounded" ref="indexentry"/>
+          </xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="index"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.index"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.index">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- INDEX ENTRY -->
+  <xs:element name="indexentry">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice>
+          <xs:element ref="namegrp"/>
+          <xs:element ref="m.access"/>
+        </xs:choice>
+        <xs:choice minOccurs="0">
+          <xs:element ref="ptrgrp"/>
+          <xs:element ref="ptr"/>
+          <xs:element ref="ref"/>
+        </xs:choice>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="indexentry"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.indexentry"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.indexentry">
+    <xs:attributeGroup ref="a.common"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- NAME GROUP -->
+  <xs:element name="namegrp">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element ref="m.access"/>
+        <xs:element ref="note"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.namegrp"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.namegrp">
+    <xs:attributeGroup ref="a.common"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- POINTER GROUP -->
+  <xs:element name="ptrgrp">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element ref="ptr"/>
+        <xs:element ref="ref"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.ptrgrp"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.ptrgrp">
+    <xs:attributeGroup ref="a.common"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- ************************************************************ -->
+  <!-- SHARED ELEMENTS -->
+  <!-- ************************************************************ -->
+  <!-- ************************************************************ -->
+  <!-- ************************************************************ -->
+  <!-- HEAD -->
+  <xs:element name="head">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="m.phrase.bare"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.head"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.head">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="althead"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- PARAGRAPH -->
+  <xs:element name="p">
+    <xs:complexType mixed="true">
+      <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.para.content"/>
+      <xs:attributeGroup ref="attlist.p"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.p">
+    <xs:attributeGroup ref="a.common"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- RENDER ELEMENTS -->
+  <!-- ************************************************************ -->
+  <!-- ************************************************************ -->
+  <!-- EMPHASIS -->
+  <xs:element name="emph" substitutionGroup="m.render">
+    <xs:complexType mixed="true">
+      <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.phrase.basic"/>
+      <xs:attributeGroup ref="attlist.emph"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.emph">
+    <xs:attribute name="render" type="av.render"/>
+    <xs:attribute name="id" type="xs:ID"/>
+    <xs:attribute name="altrender"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- LINEBREAK -->
+  <xs:element name="lb" substitutionGroup="m.render">
+    <xs:complexType/>
+  </xs:element>
+  <!-- ************************************************************ -->
+  <!-- LINKING AND REFERENCE ELEMENTS -->
+  <!-- ************************************************************ -->
+  <!-- ************************************************************ -->
+  <!-- DIGITAL ARCHIVAL OBJECT -->
+  <xs:element name="dao">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="daodesc"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.dao"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.dao">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.external.ptr"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- DIGITAL ARCHIVAL OBJECT LOCATOR -->
+  <!-- (xlink:form "locator") -->
+  <xs:element name="daoloc">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="daodesc"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.daoloc"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.daoloc">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.loc.external.ptr"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- DIGITAL ARCHIVAL OBJECT DESCRIPTION -->
+  <xs:element name="daodesc">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="cm.head.n.para">
+          <xs:attributeGroup ref="attlist.daodesc"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.daodesc">
+    <xs:attributeGroup ref="a.common"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- DIGITAL ARCHIVAL OBJECT GROUP -->
+  <!-- (xlink:form: "extended") -->
+  <xs:element name="daogrp">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="daodesc"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="daoloc"/>
+          <xs:element ref="ptrloc"/>
+          <xs:element ref="extptrloc"/>
+          <xs:element ref="refloc"/>
+          <xs:element ref="extrefloc"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.daogrp"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.daogrp">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.linkgrp"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- POINTER ELEMENTS -->
+  <!-- ************************************************************ -->
+  <!-- ************************************************************ -->
+  <!-- POINTER -->
+  <!-- (xlink:form "simple") -->
+  <xs:element name="ptr" substitutionGroup="m.ptrs">
+    <xs:complexType>
+      <xs:attributeGroup ref="attlist.ptr"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.ptr">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.internal.ptr"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- POINTER LOCATOR -->
+  <!-- (xlink:form "locator") -->
+  <xs:element name="ptrloc">
+    <xs:complexType>
+      <xs:attributeGroup ref="attlist.ptrloc"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.ptrloc">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.loc.internal.ptr"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- EXTERNAL POINTER -->
+  <!-- (xlink:form "simple" -->
+  <xs:element name="extptr" substitutionGroup="m.ptrs">
+    <xs:complexType>
+      <xs:attributeGroup ref="attlist.extptr"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.extptr">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.external.ptr"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- EXTERNAL POINTER LOCATOR -->
+  <!-- (xlink:form "locator") -->
+  <xs:element name="extptrloc">
+    <xs:complexType>
+      <xs:attributeGroup ref="attlist.extptrloc"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.extptrloc">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.loc.external.ptr"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- REFERENCE ELEMENTS -->
+  <!-- ************************************************************ -->
+  <!-- ************************************************************ -->
+  <!-- REFERENCE -->
+  <!-- (xlink:form "simple") -->
+  <xs:element name="ref" substitutionGroup="m.refs">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="m.para.content.norefs"/>
+        <xs:element ref="bibref"/>
+        <xs:element ref="title"/>
+        <xs:element ref="extref"/>
+        <xs:element ref="archref"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.ref"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.ref">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.internal.ptr"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- REFERENCE LOCATOR -->
+  <!-- (xlink:form "locator" -->
+  <xs:element name="refloc">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="m.para.content.norefs"/>
+        <xs:element ref="bibref"/>
+        <xs:element ref="title"/>
+        <xs:element ref="extref"/>
+        <xs:element ref="archref"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.refloc"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.refloc">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.loc.internal.ptr"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- EXTERNAL REFERENCE -->
+  <!-- (xlink:form "simple") -->
+  <xs:element name="extref" substitutionGroup="m.refs">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="m.para.content.norefs"/>
+        <xs:element ref="bibref"/>
+        <xs:element ref="ref"/>
+        <xs:element ref="title"/>
+        <xs:element ref="archref"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.extref"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.extref">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.external.ptr"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- EXTERNAL REFERENCE LOCATOR -->
+  <!-- (xlink:form "locator") -->
+  <xs:element name="extrefloc">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="m.para.content.norefs"/>
+        <xs:element ref="bibref"/>
+        <xs:element ref="ref"/>
+        <xs:element ref="title"/>
+        <xs:element ref="archref"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.extrefloc"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.extrefloc">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.loc.external.ptr"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- LINK GROUP -->
+  <!-- (xlink:form "extended") -->
+  <xs:element name="linkgrp" substitutionGroup="m.refs">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="ptrloc"/>
+        <xs:element ref="extptrloc"/>
+        <xs:element ref="refloc"/>
+        <xs:element ref="extrefloc"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.linkgrp"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.linkgrp">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.linkgrp"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- TITLE -->
+  <xs:element name="title" substitutionGroup="m.refs">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="m.phrase.bare"/>
+        <xs:element ref="date"/>
+        <xs:element ref="num"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.title"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.title">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.access"/>
+    <xs:attributeGroup ref="a.external.ptr"/>
+    <xs:attribute name="render" type="av.render"/>
+    <xs:attribute name="extent">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="all"/>
+          <xs:enumeration value="part"/>
+          <xs:enumeration value="unknown-extent"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="pubstatus">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="pub"/>
+          <xs:enumeration value="unpub"/>
+          <xs:enumeration value="unknown-pub"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- ARCHIVAL REFERENCE -->
+  <xs:element name="archref" substitutionGroup="m.refs">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="m.phrase.basic.norefs"/>
+        <xs:element ref="bibref"/>
+        <xs:element ref="ref"/>
+        <xs:element ref="title"/>
+        <xs:element ref="extref"/>
+        <xs:group ref="m.did"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.archref"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.archref">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.external.ptr"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- BIBLIOGRAPHIC REFERENCE -->
+  <xs:element name="bibref" substitutionGroup="m.refs">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="m.phrase.basic.norefs"/>
+        <xs:element ref="edition"/>
+        <xs:element ref="imprint"/>
+        <xs:element ref="name"/>
+        <xs:element ref="num"/>
+        <xs:element ref="bibseries"/>
+        <xs:element ref="ref"/>
+        <xs:element ref="title"/>
+        <xs:element ref="famname"/>
+        <xs:element ref="persname"/>
+        <xs:element ref="corpname"/>
+        <xs:element ref="extref"/>
+        <xs:element ref="archref"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.bibref"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.bibref">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.external.ptr"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- EDITION -->
+  <xs:element name="edition">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="m.phrase.bare"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.edition"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.edition">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- BIBLIOGRAPHIC SERIES -->
+  <xs:element name="bibseries">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="m.phrase.bare"/>
+        <xs:element ref="title"/>
+        <xs:element ref="num"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.bibseries"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.bibseries">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- IMPRINT -->
+  <xs:element name="imprint">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="m.phrase.bare"/>
+        <xs:element ref="publisher"/>
+        <xs:element ref="geogname"/>
+        <xs:element ref="date"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.imprint"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.imprint">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- PUBLISHER -->
+  <xs:element name="publisher">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="m.phrase.bare"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.publisher"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.publisher">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- ACCESS ELEMENTS -->
+  <!-- ************************************************************ -->
+  <!-- CORPORATE NAME -->
+  <xs:element name="corpname" substitutionGroup="m.access">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="m.phrase.bare"/>
+        <xs:element ref="subarea"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.corpname"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.corpname">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.access"/>
+    <xs:attribute name="role"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- FAMILY NAME -->
+  <xs:element name="famname" substitutionGroup="m.access">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="m.phrase.bare"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.famname"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.famname">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.access"/>
+    <xs:attribute name="role"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- GEOGRAPHICAL NAME -->
+  <xs:element name="geogname" substitutionGroup="m.access">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="m.phrase.bare"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.geogname"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.geogname">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.access"/>
+    <xs:attribute name="role"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- GENRE FORM -->
+  <xs:element name="genreform" substitutionGroup="m.access">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="m.phrase.bare"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.genreform"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.genreform">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.access"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- NAME -->
+  <xs:element name="name" substitutionGroup="m.access">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="m.phrase.bare"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.name"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.name">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.access"/>
+    <xs:attribute name="role"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- OCCUPATION -->
+  <xs:element name="occupation" substitutionGroup="m.access">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="m.phrase.bare"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.occupation"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.occupation">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.access"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- FUNCTION -->
+  <xs:element name="function" substitutionGroup="m.access">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="m.phrase.bare"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.function"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.function">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.access"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- PERSONAL NAME -->
+  <xs:element name="persname" substitutionGroup="m.access">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="m.phrase.bare"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.persname"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.persname">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.access"/>
+    <xs:attribute name="role"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- SUBJECT -->
+  <xs:element name="subject" substitutionGroup="m.access">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="m.phrase.bare"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.subject"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.subject">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attributeGroup ref="a.access"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- DATA ELEMENTS -->
+  <!-- ************************************************************ -->
+  <!-- ************************************************************ -->
+  <!-- DATE -->
+  <xs:element name="date" substitutionGroup="m.data">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="m.phrase.bare"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.date"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.date">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="type"/>
+    <xs:attribute name="normal"/>
+    <xs:attribute name="certainty"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- NUMBER -->
+  <xs:element name="num" substitutionGroup="m.data">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="m.phrase.bare"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.num"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.num">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="type"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- ABBREVIATION -->
+  <xs:element name="abbr" substitutionGroup="m.phrase.basic.norefs">
+    <xs:complexType mixed="true">
+      <xs:attributeGroup ref="attlist.abbr"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.abbr">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="expan"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- EXPANSION -->
+  <xs:element name="expan" substitutionGroup="m.phrase.basic.norefs">
+    <xs:complexType mixed="true">
+      <xs:attributeGroup ref="attlist.expan"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.expan">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="abbr"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- INTERMEDIATE LEVEL ELEMENTS -->
+  <!-- ************************************************************ -->
+  <!-- ************************************************************ -->
+  <!-- ADDRESS -->
+  <xs:element name="address">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="addressline"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.address"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.address">
+    <xs:attributeGroup ref="a.common"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- ADDRESS LINE -->
+  <xs:element name="addressline">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="m.phrase.bare"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.addressline"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.addressline">
+    <xs:attributeGroup ref="a.common"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- CHRONOLOGICAL LIST -->
+  <xs:element name="chronlist">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:element minOccurs="0" ref="listhead"/>
+        <xs:element maxOccurs="unbounded" ref="chronitem"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.chronlist"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.chronlist">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- CHRONOLOGICAL ITEM -->
+  <xs:element name="chronitem">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="date"/>
+        <xs:choice>
+          <xs:element ref="event"/>
+          <xs:element ref="eventgrp"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.chronitem"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.chronitem">
+    <xs:attributeGroup ref="a.common"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- EVENT -->
+  <xs:element name="event">
+    <xs:complexType mixed="true">
+      <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.para.content"/>
+      <xs:attributeGroup ref="attlist.event"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.event">
+    <xs:attributeGroup ref="a.common"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- EVENT GROUP -->
+  <xs:element name="eventgrp">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="event"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.eventgrp"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.eventgrp">
+    <xs:attributeGroup ref="a.common"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- LIST -->
+  <xs:element name="list">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:choice>
+          <xs:element maxOccurs="unbounded" ref="item"/>
+          <xs:sequence>
+            <xs:element minOccurs="0" ref="listhead"/>
+            <xs:element maxOccurs="unbounded" ref="defitem"/>
+          </xs:sequence>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.list"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.list">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="type">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="simple"/>
+          <xs:enumeration value="deflist"/>
+          <xs:enumeration value="marked"/>
+          <xs:enumeration value="ordered"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="mark"/>
+    <xs:attribute name="numeration">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="arabic"/>
+          <xs:enumeration value="upperalpha"/>
+          <xs:enumeration value="loweralpha"/>
+          <xs:enumeration value="upperroman"/>
+          <xs:enumeration value="lowerroman"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="continuation">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="continues"/>
+          <xs:enumeration value="starts"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- LIST HEAD -->
+  <xs:element name="listhead">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head01"/>
+        <xs:element minOccurs="0" ref="head02"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.listhead"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.listhead">
+    <xs:attributeGroup ref="a.common"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- HEAD 01 -->
+  <xs:element name="head01">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="m.phrase.bare"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.head01"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.head01">
+    <xs:attributeGroup ref="a.common"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- HEAD 02 -->
+  <xs:element name="head02">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="m.phrase.bare"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.head02"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.head02">
+    <xs:attributeGroup ref="a.common"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- ITEM -->
+  <xs:element name="item">
+    <xs:complexType mixed="true">
+      <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.para.content"/>
+      <xs:attributeGroup ref="attlist.item"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.item">
+    <xs:attributeGroup ref="a.common"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- LABEL -->
+  <xs:element name="label">
+    <xs:complexType mixed="true">
+      <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.phrase.plus"/>
+      <xs:attributeGroup ref="attlist.label"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.label">
+    <xs:attributeGroup ref="a.common"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- DEFINITION ITEM -->
+  <xs:element name="defitem">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="label"/>
+        <xs:element ref="item"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.defitem"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.defitem">
+    <xs:attributeGroup ref="a.common"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- BLOCK QUOTE -->
+  <xs:element name="blockquote">
+    <xs:complexType>
+      <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.blocks.noquote"/>
+      <xs:attributeGroup ref="attlist.blockquote"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.blockquote">
+    <xs:attributeGroup ref="a.common"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- NOTE -->
+  <xs:element name="note">
+    <xs:complexType>
+      <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.blocks"/>
+      <xs:attributeGroup ref="attlist.note"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.note">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="label"/>
+    <xs:attribute name="show">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="embed"/>
+          <xs:enumeration value="new"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="actuate">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="auto"/>
+          <xs:enumeration value="user"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="encodinganalog"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- TABLE ELEMENT DECLARATIONS (CALS) -->
+  <!-- ************************************************************ -->
+  <!-- TABLE -->
+  <xs:element name="table">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="head"/>
+        <xs:element maxOccurs="unbounded" ref="tgroup"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.table"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.table">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="tabstyle" type="xs:NMTOKEN"/>
+    <xs:attribute name="tocentry" default="1"/>
+    <xs:attribute name="shortentry"/>
+    <xs:attribute name="frame">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="top"/>
+          <xs:enumeration value="bottom"/>
+          <xs:enumeration value="topbot"/>
+          <xs:enumeration value="all"/>
+          <xs:enumeration value="sides"/>
+          <xs:enumeration value="none"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="colsep"/>
+    <xs:attribute name="rowsep"/>
+    <xs:attribute name="orient">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="port"/>
+          <xs:enumeration value="land"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="pgwide"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- TABLE GROUP -->
+  <xs:element name="tgroup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="colspec"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spanspec"/>
+        <xs:element minOccurs="0" ref="thead"/>
+        <xs:element minOccurs="0" ref="tfoot"/>
+        <xs:element ref="tbody"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.tgroup"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.tgroup">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="cols" use="required"/>
+    <xs:attribute name="tgroupstyle" type="xs:NMTOKEN"/>
+    <xs:attribute name="colsep"/>
+    <xs:attribute name="rowsep"/>
+    <xs:attribute name="align" default="left">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="left"/>
+          <xs:enumeration value="right"/>
+          <xs:enumeration value="center"/>
+          <xs:enumeration value="justify"/>
+          <xs:enumeration value="char"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="charoff" default="50"/>
+    <xs:attribute name="char" default=""/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- TABLE COLUMN SPECIFICATION -->
+  <xs:element name="colspec">
+    <xs:complexType>
+      <xs:attributeGroup ref="attlist.colspec"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.colspec">
+    <xs:attribute name="colnum"/>
+    <xs:attribute name="colname" type="xs:NMTOKEN"/>
+    <xs:attribute name="align">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="left"/>
+          <xs:enumeration value="right"/>
+          <xs:enumeration value="center"/>
+          <xs:enumeration value="justify"/>
+          <xs:enumeration value="char"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="charoff"/>
+    <xs:attribute name="char"/>
+    <xs:attribute name="colwidth"/>
+    <xs:attribute name="colsep"/>
+    <xs:attribute name="rowsep"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- TABLE SPANNING COLUMN SPECIFICATION -->
+  <xs:element name="spanspec">
+    <xs:complexType>
+      <xs:attributeGroup ref="attlist.spanspec"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.spanspec">
+    <xs:attribute name="namest" use="required" type="xs:NMTOKEN"/>
+    <xs:attribute name="nameend" use="required" type="xs:NMTOKEN"/>
+    <xs:attribute name="spanname" use="required" type="xs:NMTOKEN"/>
+    <xs:attribute name="align">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="left"/>
+          <xs:enumeration value="right"/>
+          <xs:enumeration value="center"/>
+          <xs:enumeration value="justify"/>
+          <xs:enumeration value="char"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="charoff"/>
+    <xs:attribute name="char"/>
+    <xs:attribute name="colsep"/>
+    <xs:attribute name="rowsep"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- TABLE HEAD -->
+  <xs:element name="thead">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="row"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.thead"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.thead">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="valign" default="bottom">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="top"/>
+          <xs:enumeration value="middle"/>
+          <xs:enumeration value="bottom"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- TABLE FOOT -->
+  <xs:element name="tfoot">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="colspec"/>
+        <xs:element maxOccurs="unbounded" ref="row"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.tfoot"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.tfoot">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="valign" default="top">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="top"/>
+          <xs:enumeration value="middle"/>
+          <xs:enumeration value="bottom"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- TABLE BODY -->
+  <xs:element name="tbody">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="row"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.tbody"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.tbody">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="valign" default="top">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="top"/>
+          <xs:enumeration value="middle"/>
+          <xs:enumeration value="bottom"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- ROW -->
+  <xs:element name="row">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="entry"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.row"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.row">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="valign">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="top"/>
+          <xs:enumeration value="middle"/>
+          <xs:enumeration value="bottom"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="rowsep"/>
+  </xs:attributeGroup>
+  <!-- ************************************************************ -->
+  <!-- ENTRY -->
+  <xs:element name="entry">
+    <xs:complexType mixed="true">
+      <xs:group minOccurs="0" maxOccurs="unbounded" ref="m.table.entry"/>
+      <xs:attributeGroup ref="attlist.entry"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.entry">
+    <xs:attributeGroup ref="a.common"/>
+    <xs:attribute name="colname" type="xs:NMTOKEN"/>
+    <xs:attribute name="namest" type="xs:NMTOKEN"/>
+    <xs:attribute name="nameend" type="xs:NMTOKEN"/>
+    <xs:attribute name="spanname" type="xs:NMTOKEN"/>
+    <xs:attribute name="morerows" default="0"/>
+    <xs:attribute name="colsep"/>
+    <xs:attribute name="rowsep"/>
+    <xs:attribute name="rotate" default="0"/>
+    <xs:attribute name="valign">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="top"/>
+          <xs:enumeration value="middle"/>
+          <xs:enumeration value="bottom"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="align">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="left"/>
+          <xs:enumeration value="right"/>
+          <xs:enumeration value="center"/>
+          <xs:enumeration value="justify"/>
+          <xs:enumeration value="char"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="charoff"/>
+    <xs:attribute name="char"/>
+  </xs:attributeGroup>
+</xs:schema>
+<!-- ************************************************************ -->
+<!-- END OF EADTABLE DTD -->
+<!-- ************************************************************ -->
+<!-- END of EAD BASIC DECLARATIONS -->
+<!-- ************************************************************ -->
+<!-- ************************************************************ -->
+<!-- ************************************************************ -->
+<!-- END eadbase -->
+<!-- ************************************************************ -->
+<!-- ************************************************************ -->
